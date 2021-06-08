@@ -26,6 +26,11 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.14</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api -->
         <dependency>
             <groupId>javax.websocket</groupId>
@@ -33,6 +38,7 @@
             <version>1.1</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <build>

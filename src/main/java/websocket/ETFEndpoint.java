@@ -14,10 +14,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+import websocket.zookeeper;
 
 /* WebSocket version of the dukeetf example */
 @ServerEndpoint("/dukeetf")
 public class ETFEndpoint {
+    private static final zookeeper zoo = new zookeeper();
     private static final Logger logger = Logger.getLogger("ETFEndpoint");
     /* Queue for all open WebSocket sessions */
     static Queue<Session> queue = new ConcurrentLinkedQueue<>();
@@ -29,7 +31,7 @@ public class ETFEndpoint {
             /* Send updates to all open WebSocket sessions */
             for (Session session : queue) {
                 session.getBasicRemote().sendText(msg);
-                logger.log(Level.INFO, "Sent: {0}", msg);
+               // logger.log(Level.INFO, "Sent: {0}", msg);
             }
         } catch (IOException e) {
             logger.log(Level.INFO, e.toString());
@@ -53,6 +55,7 @@ public class ETFEndpoint {
         logger.log(Level.INFO, "Received: {0}", msg);
         String mmsg = "--Response by server--" + msg;
         sendmsg(mmsg);
+        zoo.getDataTest();
     }
 
     @OnOpen
